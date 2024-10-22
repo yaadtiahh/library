@@ -4,6 +4,10 @@ let books = [
     'genre': 'Фантастика',
   },
   {
+    'title': 'Метро 2033', 
+    'genre': 'Фантастика',
+  },
+  {
     'title': 'Баба-яга Бессмертная', 
     'genre': 'Фантастика',
   },
@@ -18,10 +22,6 @@ let books = [
   {
     'title': 'Одиннадцать минут', 
     'genre': 'Проза',
-  },
-  {
-    'title': 'Метро 2033', 
-    'genre': 'Фантастика',
   },
   {
     'title': 'Рабыня страсти', 
@@ -41,37 +41,41 @@ let books = [
   }
 ];
 
-let i = 0;
 let humor = [];
 let love = [];
 let fantasy = [];
 let classic = [];
 let all_genres = [];
 
+
+for (let i = 0;i < books.length; i++) {
+  if (all_genres.includes(books[i].genre) != true)  {
+    all_genres.push(books[i].genre)
+  }
+}
+
+let i = 0;
 while (i < books.length) {
-    books.forEach(function(currentValue, index) {
-        if (currentValue.genre == "Фантастика" && index == i) {
-            fantasy.push(currentValue);
-        } else if (currentValue.genre == "Проза" && index == i) {
-            classic.push(currentValue);
-        } else if (currentValue.genre == "Роман" && index == i) {
-            love.push(currentValue);
-        } else if (currentValue.genre == "Юмор" && index == i) {
-            humor.push(currentValue);
-        }
-        i++
-    })
+  all_genres.forEach(function(genre, index) {
+    if (genre == books[i].genre && index == 0) {
+      fantasy.push(books[i]);
+    } else if (genre == books[i].genre && index == 1) {
+      love.push(books[i]);
+    } else if (genre == books[i].genre && index == 2) {
+      humor.push(books[i]);
+    } else if (genre == books[i].genre && index == 3) {
+      classic.push(books[i]);   
+  }
+  })
+  i++;
 }
 
-function sort_books(){
-    fantasy.sort();
-    love.sort();
-    classic.sort();
-    humor.sort();
+function sort_books(books_by_genre) {
+  books_by_genre.sort((a, b) => a.title > b.title ? 1 : -1);
+  console.log(books_by_genre)
 }
 
-sort_books()
-console.log(fantasy)
-console.log(love)
-console.log(classic)
-console.log(humor)
+sort_books(fantasy);
+sort_books(love);
+sort_books(humor);
+sort_books(classic);
